@@ -1,0 +1,21 @@
+{
+ "name": "Inglés Profesional",
+ "short_name": "Inglés Profesional",
+ "start_url": "./",
+ "display": "standalone",
+ "background_color": "#E9A90C",
+ "theme_color": "#F7D63E",
+ "icons": [
+  {
+   "src": "icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any maskable"
+  },
+  {
+   "src": "icon.svg",
+   "sizes": "any",
+   "type": "image/svg+xml"
+  }
+ ]
+}

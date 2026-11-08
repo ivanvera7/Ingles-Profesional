@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Inglés Profesional</title>
+<meta name="theme-color" content="#F7D63E">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Inglés Profesional">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --acc:#F7D63E; --acc2:#E9A90C; --ink-acc:#8a6400; --on-acc:#2b2000;
+  --ok:#28b04f; --ko:#ff3b30;
+  --bg:#eef0f5; --text:#0b0c10; --text2:rgba(11,12,16,.62); --text3:rgba(11,12,16,.42);
+  --glass:rgba(255,255,255,.52); --glass-strong:rgba(255,255,255,.72); --glass-b:rgba(255,255,255,.85);
+  --row:rgba(255,255,255,.55); --row-b:rgba(255,255,255,.9); --sep:rgba(11,12,16,.08);
+  --shadow:0 1px 1px rgba(0,0,0,.04),0 12px 32px -12px rgba(30,35,60,.22),0 40px 80px -40px rgba(30,35,60,.25);
+  --hi:rgba(255,255,255,.95); --blob-o:.55;
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Manrope,"Helvetica Neue",sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,monospace;
+  color-scheme:light dark;
+}
+@media (prefers-color-scheme:dark){:root{
+  --ok:#30d158; --ko:#ff453a; --ink-acc:var(--acc);
+  --bg:#05060a; --text:#f5f6fa; --text2:rgba(245,246,250,.64); --text3:rgba(245,246,250,.4);
+  --glass:rgba(255,255,255,.07); --glass-strong:rgba(30,32,40,.6); --glass-b:rgba(255,255,255,.14);
+  --row:rgba(255,255,255,.05); --row-b:rgba(255,255,255,.1); --sep:rgba(255,255,255,.08);
+  --shadow:0 1px 1px rgba(0,0,0,.3),0 20px 50px -20px rgba(0,0,0,.7);
+  --hi:rgba(255,255,255,.22); --blob-o:0.22;
+}}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+body{min-height:100vh;min-height:100dvh;background:var(--bg);color:var(--text);font-family:var(--font);font-size:17px;line-height:1.45;-webkit-font-smoothing:antialiased;letter-spacing:-.01em;overflow-x:hidden}
+
+/* living backdrop: soft colour fields the glass refracts */
+.bg{position:fixed;inset:-20vmax;z-index:-1;pointer-events:none;filter:blur(70px) saturate(140%)}
+.bg i{position:absolute;border-radius:50%;opacity:var(--blob-o);animation:drift 28s ease-in-out infinite alternate}
+.bg i:nth-child(1){width:60vmax;height:60vmax;left:5%;top:0;background:var(--acc)}
+.bg i:nth-child(2){width:50vmax;height:50vmax;right:0;top:25%;background:var(--acc2);animation-duration:34s;animation-delay:-8s}
+.bg i:nth-child(3){width:45vmax;height:45vmax;left:30%;bottom:0;background:#8ea2ff;opacity:calc(var(--blob-o)*.6);animation-duration:40s;animation-delay:-16s}
+@keyframes drift{to{transform:translate(8vmax,-6vmax) scale(1.12)}}
+
+.glass{position:relative;background:var(--glass);-webkit-backdrop-filter:blur(30px) saturate(180%);backdrop-filter:blur(30px) saturate(180%);border:1px solid var(--glass-b);box-shadow:inset 0 1px 0 var(--hi),var(--shadow);isolation:isolate}
+.glass::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;
+  background:linear-gradient(160deg,rgba(255,255,255,.38),rgba(255,255,255,0) 38%),radial-gradient(120% 60% at 50% -10%,rgba(255,255,255,.25),transparent 60%);mix-blend-mode:soft-light}
+
+/* nav bar */
+.nav{position:sticky;top:0;z-index:10;padding:calc(env(safe-area-inset-top) + 10px) 16px 10px}
+.nav-in{max-width:780px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 8px 8px 10px;border-radius:999px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;min-width:0}
+.brand img{width:30px;height:30px;flex:none;filter:drop-shadow(0 2px 6px rgba(0,0,0,.18))}
+.brand span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.seg{position:relative;display:grid;grid-template-columns:1fr 1fr;padding:3px;border-radius:999px;background:rgba(120,120,128,.16);flex:none}
+.seg::before{content:"";position:absolute;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);border-radius:999px;background:var(--glass-strong);box-shadow:0 3px 10px rgba(0,0,0,.12),inset 0 1px 0 var(--hi);transition:transform .45s cubic-bezier(.3,1.4,.5,1)}
+.seg[data-i="1"]::before{transform:translateX(100%)}
+.seg button{all:unset;position:relative;z-index:1;cursor:pointer;padding:7px 16px;font-size:14px;font-weight:600;text-align:center;color:var(--text2);transition:color .2s}
+.seg button[aria-selected=true]{color:var(--text)}
+
+.wrap{max-width:780px;margin:0 auto;padding:8px 16px calc(60px + env(safe-area-inset-bottom))}
+header.hero{padding:22px 4px 22px}
+.kicker{font-size:13px;font-weight:600;color:var(--ink-acc);text-transform:uppercase;letter-spacing:.06em}
+h1{font-size:clamp(38px,8vw,60px);font-weight:800;letter-spacing:-.045em;line-height:1;margin-top:6px}
+
+.status{display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;font-size:14px;font-weight:600;font-variant-numeric:tabular-nums}
+.chip.g{color:var(--ok)} .chip.r{color:var(--ko)}
+.chip .dot{width:7px;height:7px;border-radius:50%;background:currentColor}
+.status .sp{flex:1}
+.bar{height:8px;border-radius:999px;background:rgba(120,120,128,.18);overflow:hidden;margin-bottom:18px}
+.bar i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--acc),var(--acc2));box-shadow:0 0 12px var(--acc);transition:width .6s cubic-bezier(.2,.9,.3,1)}
+
+.card{border-radius:30px;padding:clamp(20px,4.5vw,32px);animation:in .5s cubic-bezier(.2,.9,.3,1) both}
+@keyframes in{from{opacity:0;transform:translateY(14px) scale(.985)}}
+.qn{font-size:13px;font-weight:700;color:var(--ink-acc);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.q{font-size:clamp(20px,3.4vw,25px);font-weight:700;line-height:1.28;letter-spacing:-.022em;margin-bottom:20px;white-space:pre-wrap;overflow-wrap:anywhere}
+.fig{display:block;margin:0 0 20px;background:#fff;border-radius:20px;padding:12px;text-align:center;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
+.fig img{max-width:100%;max-height:420px;height:auto;display:inline-block;vertical-align:middle;border-radius:8px}
+.opts{display:grid;gap:10px}
+.opt{all:unset;box-sizing:border-box;display:flex;gap:14px;align-items:center;padding:14px 16px;border-radius:20px;cursor:pointer;background:var(--row);border:1px solid var(--row-b);box-shadow:inset 0 1px 0 var(--hi);transition:transform .25s cubic-bezier(.3,1.4,.5,1),background .2s,border-color .2s,opacity .3s;overflow-wrap:anywhere}
+.opt:hover:not([disabled]){transform:translateY(-1px) scale(1.005);background:var(--glass-strong)}
+.opt:active:not([disabled]){transform:scale(.98)}
+.opt .k{flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:14px;font-weight:700;color:var(--text2);background:rgba(120,120,128,.14);transition:.25s}
+.opt[disabled]{cursor:default}
+.opt.ok{background:color-mix(in srgb,var(--ok) 16%,transparent);border-color:color-mix(in srgb,var(--ok) 55%,transparent)}
+.opt.ok .k{background:var(--ok);color:#fff}
+.opt.ko{background:color-mix(in srgb,var(--ko) 14%,transparent);border-color:color-mix(in srgb,var(--ko) 55%,transparent);animation:shake .4s}
+.opt.ko .k{background:var(--ko);color:#fff}
+.opt.dim{opacity:.42}
+@keyframes shake{25%{transform:translateX(-5px)}50%{transform:translateX(4px)}75%{transform:translateX(-2px)}}
+.exp{margin-top:18px;padding:14px 16px;border-radius:18px;background:color-mix(in srgb,var(--acc) 14%,transparent);border:1px solid color-mix(in srgb,var(--acc) 30%,transparent);font-size:15.5px;color:var(--text);animation:in .4s both}
+.exp b{display:block;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-acc);margin-bottom:4px}
+.foot{display:flex;justify-content:space-between;align-items:center;margin-top:20px;gap:12px}
+.hint{font-size:13px;color:var(--text3)}
+.btn{all:unset;cursor:pointer;font-size:16px;font-weight:700;padding:13px 22px;border-radius:999px;text-align:center;transition:transform .25s cubic-bezier(.3,1.4,.5,1),filter .2s;color:var(--text)}
+.btn:active{transform:scale(.96)}
+.btn.pri{color:var(--on-acc);background:linear-gradient(180deg,var(--acc),var(--acc2));box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -2px 6px rgba(0,0,0,.12),0 10px 24px -8px var(--acc2)}
+.btn.pri:hover{filter:brightness(1.06) saturate(1.1)}
+.btn.sec{background:var(--row);border:1px solid var(--row-b);box-shadow:inset 0 1px 0 var(--hi)}
+.btn[hidden]{display:none}
+.btn:focus-visible,.opt:focus-visible,.seg button:focus-visible,.search input:focus-visible{outline:3px solid color-mix(in srgb,var(--acc) 70%,transparent);outline-offset:2px}
+
+.end{text-align:center}
+.ring{position:relative;width:200px;height:200px;margin:4px auto 10px}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:14;stroke-linecap:round}
+.ring .t{stroke:rgba(120,120,128,.16)}
+.ring .v{transition:stroke-dashoffset 1.2s cubic-bezier(.2,.9,.3,1) .15s;filter:drop-shadow(0 0 8px currentColor)}
+.ring .n{position:absolute;inset:0;display:grid;place-content:center;font-size:58px;font-weight:800;letter-spacing:-.05em;line-height:1}
+.ring .n small{font-size:15px;font-weight:600;color:var(--text3);letter-spacing:0;margin-top:4px}
+.verdict{font-size:20px;font-weight:700;letter-spacing:-.02em}
+.sub{color:var(--text2);font-size:15px;margin:4px 0 22px}
+.row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.list{margin-top:26px;text-align:left;border-radius:22px;overflow:hidden}
+.list li{list-style:none;padding:14px 18px;font-size:15px;font-weight:600;border-top:1px solid var(--sep)}
+.list li:first-child{border-top:0}
+.list li span{display:block;font-weight:500;color:var(--ok);margin-top:3px}
+.list h4{padding:12px 18px 0;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text3)}
+
+.search{display:flex;align-items:center;gap:8px;border-radius:999px;padding:0 16px;margin-bottom:14px}
+.search svg{flex:none;width:18px;height:18px;color:var(--text3)}
+.search input{all:unset;flex:1;padding:13px 0;font-size:16px;color:var(--text)}
+.search input::placeholder{color:var(--text3)}
+.rev{display:grid;gap:12px}
+.rev article{border-radius:24px;padding:18px 20px}
+.rev h3{font-size:17px;font-weight:700;letter-spacing:-.015em;white-space:pre-wrap;margin-bottom:12px;overflow-wrap:anywhere}
+.rev h3 b{color:var(--ink-acc);margin-right:8px;font-variant-numeric:tabular-nums}
+.rev .fig img{max-height:260px}
+.rev ul{list-style:none;display:grid;gap:6px}
+.rev li{font-size:15px;color:var(--text2);padding:8px 12px 8px 36px;border-radius:12px;position:relative;overflow-wrap:anywhere}
+.rev li::before{content:"";position:absolute;left:14px;top:50%;width:6px;height:6px;margin-top:-3px;border-radius:50%;background:var(--text3)}
+.rev li.c{color:var(--text);font-weight:600;background:color-mix(in srgb,var(--ok) 14%,transparent)}
+.rev li.c::before{width:14px;height:14px;left:10px;margin-top:-7px;background:var(--ok) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M3.5 7.2l2.3 2.3 4.7-5' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+.rev p{margin-top:12px;font-size:14.5px;color:var(--text2);border-top:1px solid var(--sep);padding-top:12px}
+.empty{text-align:center;color:var(--text3);padding:30px}
+footer{margin-top:34px;font-size:12.5px;color:var(--text3);text-align:center;line-height:1.7}
+footer a{color:inherit}
+@media (max-width:520px){.brand span{display:none}.hint{display:none}.foot{justify-content:flex-end}.btn.pri{flex:1}}
+@media (prefers-reduced-motion:reduce){*,*::before{animation:none!important;transition:none!important}}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.glass{background:var(--glass-strong)}}
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true"><i></i><i></i><i></i></div>
+<nav class="nav">
+  <div class="nav-in glass">
+    <div class="brand"><img src="icon.svg" alt=""><span>Inglés Profesional</span></div>
+    <div class="seg" role="tablist" data-i="0">
+      <button role="tab" aria-selected="true" data-mode="test">Test</button>
+      <button role="tab" aria-selected="false" data-mode="review">Repaso</button>
+    </div>
+  </div>
+</nav>
+<div class="wrap">
+  <header class="hero">
+    <div class="kicker">Ilerna DAW · Examen 2025 · 78 preguntas</div>
+    <h1>Inglés Profesional</h1>
+  </header>
+  <main id="app"></main>
+  <footer>Preguntas de Daypo: <a href="https://www.daypo.com/ingles-ilerna-daw-examen-2025.html">Inglés Ilerna DAW Examen 2025 (JMELION)</a></footer>
+</div>
+<script>
+const DATA = [{"q": "You ______ finish your homework before you go out.", "o": ["mustn't", " might", "could", "should"], "a": [3], "h": ""}, {"q": "We _____ have a party for his birthday.", "o": ["going to", "are going to", "is going to", "went"], "a": [1], "h": ""}, {"q": "They ______ the football match at this time next week.", "o": ["will be seeing", "will see", "will watch", "will be watching"], "a": [3], "h": ""}, {"q": "She ______ play the piano when she was younger.", "o": ["must", " may", "could", "can"], "a": [2], "h": ""}, {"q": "They ________ visit their grandparents this weekend.", "o": ["going to", "will", "go", "are going to"], "a": [3], "h": ""}, {"q": " He _______ the book by the time you return.", "o": ["will have read", "will be reading", "will has read", "will has read"], "a": [0], "h": ""}, {"q": "What is the past simple of \"leave\"?", "o": ["Left", "Leaved", "Leaves", "Lefted"], "a": [0], "h": ""}, {"q": "He ______ his dinner.", "o": ["has just finished", "just finishes", "have just finished", "is just finishing"], "a": [0], "h": ""}, {"q": "He said, \"I can't swim\". REPORTED SPEECH: He said that he _____ swim.", "o": ["wouldn't", "can't", "won't", "couldn't"], "a": [3], "h": ""}, {"q": "The letters _____ by the secretary every morning.", "o": ["were typed", "has been typed", "are typed", "is typed"], "a": [2], "h": ""}, {"q": "The homework ______ by the students right now.", "o": ["has been done", "will be done", "was done", "is being done"], "a": [3], "h": ""}, {"q": "The musician ______ wrote that song is performing tonight.", "o": ["whose", "who", "which", "whom"], "a": [1], "h": ""}, {"q": "This is the restaurant _______ we had dinner last night.", "o": ["which", "where", "that", "who"], "a": [1], "h": ""}, {"q": "If I study hard, I _______ pass the exam.", "o": ["would have passed", "passed", "would pass", "will pass"], "a": [3], "h": ""}, {"q": "If I were you, I _______ take that job.", "o": ["would", "can", "am", "will"], "a": [0], "h": ""}, {"q": "If I _______ a million dollars, I would buy a house.", "o": ["would have", "will have", "had", "have"], "a": [2], "h": ""}, {"q": "He _______ go to the party if he feels well.", "o": ["could", "should", "may", "must"], "a": [2], "h": ""}, {"q": "The book is ______ the shelf next to the window.", "o": ["at", "to", "in", "on"], "a": [3], "h": ""}, {"q": "We walked _______ the park after lunch.", "o": ["under", "through", "on", "in"], "a": [1], "h": ""}, {"q": "If she finishes her work early, she _________ join us for dinner.", "o": ["would have", "has", "would", "will"], "a": [3], "h": ""}, {"q": "By 2025, they _______ their new house.", "o": ["will have been building", "will have built", "will build", "will have building"], "a": [1], "h": ""}, {"q": "He _____ start a new job next month.", "o": ["is going to", "was going to", "going to", "are going to"], "a": [0], "h": ""}, {"q": "We saw ______ car in the parking lot.", "o": ["him", "hers", "he", "his"], "a": [3], "h": ""}, {"q": "I ______ that movie three times.", "o": ["saw", "have seen", "see", "has seen"], "a": [1], "h": ""}, {"q": "We _______ dinner at 8 p.m. tonight.", "o": ["will", "are", "is having", "are having"], "a": [3], "h": ""}, {"q": "This time tomorrow, I _______ on the beach.", "o": ["will be relaxing", "will relax", "am relaxing", "relax"], "a": [0], "h": ""}, {"q": "By 2025, they _______ their new house.", "o": ["will finish", "will be finishing", "will have finished", "finish"], "a": [2], "h": ""}, {"q": "By the time I found my wallet, someone _______ it.", "o": ["had taken", "has taken", "took", "take"], "a": [0], "h": ""}, {"q": "We ______ a new project this week.", "o": ["has started", "are starting", "is starting", "starting"], "a": [1], "h": ""}, {"q": "That was the ______ day of my life!", "o": ["worse", "bad", "worst", "baddest"], "a": [2], "h": ""}, {"q": "The man _____ car was stolen reported it to the police.", "o": ["whose", "who", "which", "whom"], "a": [0], "h": ""}, {"q": "They are working late today, ________?", "o": ["will they\n", "aren't they", "are they", "do they"], "a": [1], "h": ""}, {"q": "You're coming to the party, _______?", "o": ["don't you", "will you", "are you", "aren't you"], "a": [3], "h": ""}, {"q": "The cake ______ by my mother yesterday.", "o": ["is bake", "bakes", "has been baked", "was baked"], "a": [3], "h": ""}, {"q": "Which is the passive voice of: The chef cooks food every day.", "o": ["Foods is cooked every day by the chef.", "Foods was cooked every day by the chef.", "Foods will be cooked every day by the chef.", "Foods is going to be cooked every day by the chef."], "a": [0], "h": ""}, {"q": "How long ______ you been living here?", "o": ["do", "does", "has", "have"], "a": [3], "h": ""}, {"q": "He ______ when the teacher asked him.", "o": ["wasn't listening", "weren't listening", "won't listening", "aren't listening"], "a": [0], "h": ""}, {"q": " If I liked the fish, I ______ the cod.", "o": ["order", "ordered", "would have order", "would have ordered"], "a": [3], "h": ""}, {"q": "If she had invited me to the party, I _______.", "o": ["would have go", "would have gone", "have gone", "would have went"], "a": [1], "h": ""}, {"q": "If Mary had studied, _____ the exam.", "o": ["She won't passed ", "She would have passed", "You will pass ", "She pass "], "a": [1], "h": ""}, {"q": "Alice _______ science while her parents were watching TV.", "o": ["going studying", "will studying", "was studying", "going to study"], "a": [2], "h": ""}, {"q": "She said: \"I went to Paris.\" ⟹ She said that she _______ to Paris.", "o": ["drive", "has gone", "went", "had gone"], "a": [3], "h": ""}, {"q": "If I spoke to him directly, I _____ better.", "o": ["am", "would have be", "be", "would be"], "a": [3], "h": ""}, {"q": "Which is the report speech of: Steve said \"I'm living in London\".", "o": ["Steve said that he is living in London.", "Steve said that he was living in London.", "Steve said that he had been living in London.", "Steve said that he will live in London."], "a": [1], "h": ""}, {"q": "If you _______, you would have passed the exam.", "o": ["have", "never studied", "studies", "had studied"], "a": [3], "h": ""}, {"q": " _______ the plane leave from the airport at 8 o'clock?", "o": ["What", "When", "Where", "How"], "a": [1], "h": ""}, {"q": "If he _____ money, he would travel around the world.", "o": ["Has", "Had", "Have", "Having"], "a": [1], "h": ""}, {"q": "I was sleeping when Julie called. ⟹ She said that she _______ when Julie called.", "o": ["She said that she sleep when Julie called.", "She said that she was sleeping when Julie called.", "She said that she had sleeping when Julie called.", "She said that she has sleeping when Julie called."], "a": [1], "h": ""}, {"q": "Many accidents _______ by dangerous driving.", "o": ["is caused", "are caused", "caused", "will caused"], "a": [1], "h": ""}, {"q": "How long has she _____ English?", "o": ["learning", "learned", "have learned", "been learning"], "a": [3], "h": ""}, {"q": "If I went to the party, I _______ tired tomorrow.", "o": ["would be", "would have", "will be", "would been"], "a": [0], "h": ""}, {"q": "______ she work in the same company?", "o": ["Does", "Do", "Are", "Is"], "a": [0], "h": ""}, {"q": "We usually ______ tennis.", "o": ["playing", "play", "plays", "have play"], "a": [1], "h": ""}, {"q": "I'm sure she ______ the competition.", "o": ["won", "is winning", "will win", "wins"], "a": [2], "h": ""}, {"q": "You ______ finish your homework before you go out.", "o": ["can´t", "coult", "has to", "must"], "a": [3], "h": ""}, {"q": "If you mix red and blue, you ______ purple.", "o": ["get", "would get", "will get", "got"], "a": [0], "h": ""}, {"q": "If I ______ a car, I would drive to work every day", "o": ["had", "have", "will have", "would have had"], "a": [0], "h": ""}, {"q": "If you ______ the sun too long, you get sunburned.", "o": ["stay under", "will stay under", "had stayed under", "stayed under"], "a": [0], "h": ""}, {"q": "We've met before, ______?", "o": ["haven't we", "did we", "have we", "are we"], "a": [0], "h": ""}, {"q": "The teacher ______ thousands of beautiful gifts recently.", "o": ["has been given", "were given", "will be gived", "are receiving"], "a": [0], "h": ""}, {"q": "The book, ______ I borrowed from the library, was fascinating.", "o": ["which", "who", "where", "whose"], "a": [0], "h": ""}, {"q": "The students ______ study hard will pass the exam.", "o": ["who", "wich", "when", "where"], "a": [0], "h": ""}, {"q": "My brother ___ in New York.", "o": ["isn’t live", "don’t live", "aren’t living", "doesn’t live"], "a": [3], "h": ""}, {"q": "What is the superlative form of “far”?", "o": ["More far", "Farthest", "Farest", "Further"], "a": [1], "h": ""}, {"q": "This is _____ house", "o": ["me", "mine", "my", "yours"], "a": [2], "h": ""}, {"q": "They _____ to the cinema yesterday:", "o": ["Goed", "Going", "Goes", "Went"], "a": [3], "h": ""}, {"q": "They _____ finished their homework", "o": ["is", "have", "be", "are"], "a": [1], "h": ""}, {"q": "She _____ study abroad next year:", "o": ["is going to", "going to", "was going", "is"], "a": [0], "h": ""}, {"q": "By this time next week, she _____ her final exams", "o": ["will have completed", "completes", "will complete", "will be completing"], "a": [0], "h": ""}, {"q": "If it rains tomorrow, we _____ the picnic:", "o": ["would cancel", "cancel", "cancelled", "will cancel"], "a": [3], "h": ""}, {"q": "If you _____ water at 100°C, it boils", "o": ["will heat", "is heated", "heated", "heat"], "a": [3], "h": ""}, {"q": "The project ______ by the team next week", "o": ["is completed", "has been completed", "was completed", "will be completed"], "a": [3], "h": ""}, {"q": "“I will finish my homework later,” she said. → She said that she ______ her homework later", "o": ["has finished", "would finish", "will finish", "finished"], "a": [1], "h": ""}, {"q": "He said, “I am feeling better now.” → He said that he ______ better then:", "o": ["is feeling", "has been feeling", "was feeling", "had been feeling"], "a": [2], "h": ""}, {"q": "They said: “We can come to the party.” – Reported Speech: They said they ______ to the party:", "o": ["will come", "had come", "would come", "could come"], "a": [3], "h": ""}, {"q": "He told me: “I have found a new job.” – Reported Speech: He told me that he ______ a new job:", "o": ["finds", "will find", "found", "had found"], "a": [3], "h": ""}, {"q": "They said: “We are going to the beach.” – They said that they ______ to the beach", "o": ["had gone", "were going", "will go", "are going"], "a": [1], "h": ""}, {"q": "She said: “I am going to the store.” – Reported Speech: She said that she ______ to the store", "o": ["will go", "has been going", "was going", "is going"], "a": [2], "h": ""}];
+const KEY = 'ingles-best';
+const $app = document.getElementById('app');
+const L = 'ABCD';
+const norm = s => s.trim().replace(/[.\s]+$/, '').toLowerCase();
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
+// Correct if the chosen text matches a correct option (some sources repeat an answer with only a trailing dot changed).
+const isRight = (q, i) => q.a.some(a => norm(q.o[a]) === norm(q.o[i]));
+// Image opens full size in a new tab.
+function fig(q) { const a = el('a', 'fig'); a.href = q.img; a.target = '_blank'; a.rel = 'noopener'; const im = el('img'); im.src = q.img; im.alt = 'Imagen de la pregunta'; im.loading = 'lazy'; a.append(im); return a; }
+const chip = (cls, txt, glass = true) => { const c = el('span', 'chip ' + cls + (glass ? ' glass' : '')); if (cls === 'g' || cls === 'r') c.append(el('i', 'dot')); c.append(txt); return c; };
+
+let S;
+function start(ids) {
+  S = { order: shuffle(ids).map(id => ({ id, opts: shuffle(DATA[id].o.map((_, i) => i)) })), pos: 0, res: {} };
+  renderTest();
+}
+
+function renderTest() {
+  if (S.pos >= S.order.length) return renderEnd();
+  const { id, opts } = S.order[S.pos], q = DATA[id], done = S.res[id] !== undefined;
+  const vals = Object.values(S.res), ok = vals.filter(Boolean).length, ko = vals.length - ok;
+
+  const status = el('div', 'status');
+  status.append(chip('', `${S.pos + 1} / ${S.order.length}`), el('span', 'sp'), chip('g', String(ok)), chip('r', String(ko)));
+  const bar = el('div', 'bar'); const fill = el('i'); fill.style.width = (vals.length / S.order.length * 100) + '%'; bar.append(fill);
+
+  const card = el('section', 'card glass');
+  card.append(el('div', 'qn', 'Pregunta ' + (id + 1)), el('h2', 'q', q.q));
+  if (q.img) card.append(fig(q));
+  const box = el('div', 'opts'); box.setAttribute('role', 'group');
+  opts.forEach((oi, k) => {
+    const b = el('button', 'opt'); b.type = 'button';
+    b.append(el('span', 'k', L[k]), el('span', '', q.o[oi]));
+    b.onclick = () => answer(oi);
+    if (done) {
+      b.disabled = true;
+      if (isRight(q, oi)) { b.classList.add('ok'); b.firstChild.textContent = '✓'; }
+      else if (oi === S.pick) { b.classList.add('ko'); b.firstChild.textContent = '✕'; }
+      else b.classList.add('dim');
+    }
+    box.append(b);
+  });
+  card.append(box);
+  if (done && q.h) { const e = el('div', 'exp'); e.append(el('b', '', 'Explicación'), q.h); card.append(e); }
+
+  const foot = el('div', 'foot');
+  foot.append(el('span', 'hint', done ? 'Enter → siguiente' : 'Teclas A–D o 1–4'));
+  const next = el('button', 'btn pri', S.pos + 1 === S.order.length ? 'Ver resultado' : 'Siguiente');
+  next.hidden = !done; next.onclick = () => { S.pos++; renderTest(); scrollTo({ top: 0, behavior: 'smooth' }); };
+  foot.append(next);
+  card.append(foot);
+
+  $app.replaceChildren(status, bar, card);
+  if (done) next.focus({ preventScroll: true });
+}
+
+function answer(oi) {
+  const { id } = S.order[S.pos];
+  if (S.res[id] !== undefined) return;
+  S.pick = oi;
+  S.res[id] = isRight(DATA[id], oi);
+  renderTest();
+}
+
+function renderEnd() {
+  const ids = S.order.map(o => o.id), ok = ids.filter(i => S.res[i]).length, fails = ids.filter(i => !S.res[i]);
+  const nota = Math.round(ok / ids.length * 100) / 10;
+  let best = null;
+  try { best = +localStorage.getItem(KEY) || null; if (ids.length === DATA.length && nota > (best || 0)) localStorage.setItem(KEY, best = nota); } catch (e) {}
+  const color = nota >= 5 ? 'var(--ok)' : 'var(--ko)';
+  const card = el('section', 'card glass end');
+  const ring = el('div', 'ring'); const C = 2 * Math.PI * 86;
+  ring.innerHTML = `<svg viewBox="0 0 200 200"><circle class="t" cx="100" cy="100" r="86"/><circle class="v" cx="100" cy="100" r="86" stroke-dasharray="${C}" stroke-dashoffset="${C}" style="stroke:${color};color:${color}"/></svg>`;
+  const n = el('div', 'n', nota.toLocaleString('es')); n.append(el('small', '', 'sobre 10')); ring.append(n);
+  requestAnimationFrame(() => requestAnimationFrame(() => ring.querySelector('.v').style.strokeDashoffset = C * (1 - nota / 10)));
+  const verdict = nota >= 9 ? 'Sobresaliente' : nota >= 7 ? 'Muy bien' : nota >= 5 ? 'Aprobado' : 'Sigue practicando';
+  card.append(ring, el('div', 'verdict', verdict), el('div', 'sub', `${ok} aciertos · ${fails.length} fallos${best ? ` · mejor nota ${best.toLocaleString('es')}` : ''}`));
+  const row = el('div', 'row');
+  if (fails.length) { const f = el('button', 'btn pri', `Repetir falladas (${fails.length})`); f.onclick = () => start(fails); row.append(f); }
+  const r = el('button', 'btn sec', 'Test completo'); r.onclick = () => start(DATA.map((_, i) => i)); row.append(r);
+  card.append(row);
+  if (fails.length) {
+    const ul = el('ul', 'list glass'); ul.append(el('h4', '', 'Repasa estas'));
+    fails.forEach(i => { const li = el('li', '', DATA[i].q); li.append(el('span', '', DATA[i].a.map(a => DATA[i].o[a]).join(' / '))); ul.append(li); });
+    card.append(ul);
+  }
+  $app.replaceChildren(card);
+}
+
+function renderReview() {
+  const s = el('label', 'search glass');
+  s.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>';
+  const input = el('input'); input.type = 'search'; input.placeholder = 'Buscar pregunta o respuesta'; input.setAttribute('aria-label', 'Buscar');
+  s.append(input);
+  const list = el('div', 'rev'), empty = el('div', 'empty', 'Sin resultados'); empty.hidden = true;
+  const items = DATA.map((q, i) => {
+    const a = el('article', 'glass');
+    const h = el('h3'); h.append(el('b', '', String(i + 1)), q.q); a.append(h);
+    if (q.img) a.append(fig(q));
+    const ul = el('ul'); q.o.forEach((o, j) => ul.append(el('li', q.a.includes(j) ? 'c' : '', o))); a.append(ul);
+    if (q.h) a.append(el('p', '', q.h));
+    list.append(a);
+    return [a, (q.q + ' ' + q.o.join(' ') + ' ' + q.h).toLowerCase()];
+  });
+  input.oninput = () => { const t = input.value.toLowerCase(); let n = 0; items.forEach(([a, s]) => { a.hidden = !s.includes(t); n += !a.hidden; }); empty.hidden = n > 0; };
+  $app.replaceChildren(s, list, empty);
+}
+
+const seg = document.querySelector('.seg');
+seg.querySelectorAll('button').forEach((b, i) => b.onclick = () => {
+  seg.dataset.i = i;
+  seg.querySelectorAll('button').forEach(x => x.setAttribute('aria-selected', x === b));
+  b.dataset.mode === 'test' ? renderTest() : renderReview();
+});
+
+document.addEventListener('keydown', e => {
+  if (!S || S.pos >= S.order.length || !$app.querySelector('.opts') || e.target.tagName === 'INPUT') return;
+  const { id, opts } = S.order[S.pos], done = S.res[id] !== undefined;
+  const k = '1234'.indexOf(e.key) >= 0 ? '1234'.indexOf(e.key) : L.indexOf(e.key.toUpperCase());
+  if (!done && k >= 0 && k < opts.length && e.key.length === 1) answer(opts[k]);
+  else if (done && (e.key === 'Enter' || e.key === 'ArrowRight')) { e.preventDefault(); S.pos++; renderTest(); }
+});
+
+start(DATA.map((_, i) => i));
+</script>
+</body>
+</html>
